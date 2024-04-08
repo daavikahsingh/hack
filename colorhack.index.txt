@@ -1,0 +1,83 @@
+from os import system, name
+import itertools
+import threading
+import time
+import sys
+import datetime
+from base64 import b64decode, b64encode
+from datetime import date
+
+expirydate = datetime.date(2021, 9, 24)
+today = date.today()
+
+def animate_loading():
+    done = False
+    def animate():
+        for c in itertools.cycle(['|', '/', '-', '\\']):
+            if done:
+                break
+            sys.stdout.write('\rhacking in the bcone server for next colour--------- ' + c)
+            sys.stdout.flush()
+            time.sleep(0.1)
+        sys.stdout.write('\rDone!     ')
+
+    t = threading.Thread(target=animate)
+    t.start()
+
+    # Simulating a long process
+    time.sleep(20)
+    done = True
+
+def clear():
+    if name == 'nt':
+        _ = system('cls')
+    else:
+        _ = system('clear')
+
+def get_sum(n):
+    total = sum(int(digit) for digit in str(n))
+    return total
+
+def main():
+    y = 1
+    numbers = []
+    newperiod = 1  # You may need to define the initial value for newperiod
+    while y:
+        clear()
+        print(f"Enter {newperiod} Bcone Price:")
+        current = int(input())
+        animate_loading()
+        print("\n---------Successfully hacked the server-----------")
+        animate_loading()
+        print("\n---------Successfully got the colour -------------")
+        print('\n')
+        last2 = str(current)[-2:]
+        if newperiod % 2 == 0:
+            total = get_sum(current)
+            if total % 2 == 0:
+                print(newperiod + 1, " : ??, RED")
+            else:
+                print(newperiod + 1, "  : ?, GREEN")
+        else:
+            total = get_sum(current)
+            if total % 2 == 0:
+                print(newperiod + 1, "   : ??, RED")
+            else:
+                print(newperiod + 1, "   : ?, GREEN")
+        newperiod += 1
+        numbers.append(current)
+        y = int(input("Do you want to play? Press 1 to continue or 0 to exit: "))
+        if y == 0:
+            break
+        if len(numbers) > 11:
+            clear()
+            print("Play on next specified time!!")
+            print("-----------Current Time UP----------")
+            sys.exit("\n\n\nContact on Telegram @smsn_knt")
+
+if expirydate > today:
+    now = datetime.datetime.now()
+    First = now.replace(hour=13, minute=55, second=0, microsecond=0)
+
+if __name__ == "__main__":
+    main()
